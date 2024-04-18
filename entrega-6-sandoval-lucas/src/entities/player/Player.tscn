@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/entities/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/player/player_sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/player/staff.png" type="Texture" id=3]
+[ext_resource path="res://src/entities/player/Cannon.gd" type="Script" id=4]
+[ext_resource path="res://src/entities/player/PlayerProjectile.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.5, 9.5 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "death"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 28, 29, 30, 31, 32, 33, 34, 35 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "jump"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 11, 12, 13, 14, 15, 16 ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 1 )
+ACCELERATION = 30.0
+H_SPEED_LIMIT = 300.0
+jump_speed = 300
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 16385
+position = Vector2( -0.5, -9.5 )
+shape = SubResource( 1 )
+
+[node name="BodyAnimations" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/death = SubResource( 6 )
+anims/idle = SubResource( 3 )
+anims/jump = SubResource( 4 )
+anims/walk = SubResource( 5 )
+
+[node name="BodyPivot" type="Node2D" parent="."]
+
+[node name="Body" type="Sprite" parent="BodyPivot"]
+position = Vector2( -2, -11 )
+texture = ExtResource( 2 )
+hframes = 9
+vframes = 5
+
+[node name="WeaponContainer" type="Node2D" parent="."]
+position = Vector2( -3, -9 )
+
+[node name="Weapon" type="Node2D" parent="WeaponContainer"]
+unique_name_in_owner = true
+position = Vector2( -0.0635071, 0.165405 )
+script = ExtResource( 4 )
+projectile_scene = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="WeaponContainer/Weapon"]
+rotation = 1.5708
+texture = ExtResource( 3 )
+
+[node name="WeaponTip" type="Position2D" parent="WeaponContainer/Weapon"]
+position = Vector2( 15, 0 )
+
+[node name="Tween" type="Tween" parent="WeaponContainer/Weapon"]
+
+[connection signal="animation_finished" from="BodyAnimations" to="." method="_on_BodyAnimations_animation_finished"]

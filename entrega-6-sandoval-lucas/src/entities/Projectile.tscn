@@ -1,0 +1,60 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://src/entities/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/fx/charged/charged1.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/fx/charged/charged3.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/fx/charged/charged2.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/fx/hits/hits-1/hits-1-4.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/fx/hits/hits-1/hits-1-2.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/fx/hits/hits-1/hits-1-5.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/fx/hits/hits-1/hits-1-3.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/fx/hits/hits-1/hits-1-1.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-3.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-5.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-1.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-7.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-4.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-6.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/fx/hits/hits-4/hits-4-2.png" type="Texture" id=16]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 16 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "fire_hit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "fire_start",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 5.0
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 5 )
+animation = "fire_start"
+speed_scale = 2.0
+playing = true
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 4 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

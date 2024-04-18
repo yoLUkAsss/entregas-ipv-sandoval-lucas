@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/background.png" type="Texture" id=2]
+[ext_resource path="res://entities/world/Floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+[ext_resource path="res://entities/enemies/Turret.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node"]
+script = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 0.7
+margin_right = -2.0
+margin_bottom = 180.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Floor" parent="." instance=ExtResource( 3 )]
+
+[node name="Floor2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1463, 533 )
+
+[node name="Floor3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -577, 533 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 504, 389 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+
+[node name="Turret" parent="." instance=ExtResource( 5 )]
+position = Vector2( 499, 76 )
+scale = Vector2( 0.138889, 0.238889 )
+
+[node name="Turret2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 977, 71 )
+scale = Vector2( 0.138889, 0.238889 )
+
+[node name="Turret3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 41, 53 )
+scale = Vector2( 0.138889, 0.238889 )
