@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3xnl1odjtpw0"]
+
+[ext_resource type="Texture2D" uid="uid://g72rgopvc6pf" path="res://assets/player.png" id="1_merdl"]
+[ext_resource type="Script" uid="uid://cmux0o1tib6f7" path="res://entities/player.gd" id="2_b0kkn"]
+
+[node name="Player" type="Sprite2D"]
+texture = ExtResource("1_merdl")
+script = ExtResource("2_b0kkn")
+speed = 100
