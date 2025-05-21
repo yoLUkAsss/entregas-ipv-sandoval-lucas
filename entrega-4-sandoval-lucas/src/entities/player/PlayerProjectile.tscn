@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3qp5rmmpaiui"]
+
+[ext_resource type="PackedScene" uid="uid://1ni1vgqewk7c" path="res://src/entities/Projectile.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://boetn042toe1h" path="res://assets/textures/fx/bolt/bolt1.png" id="2_3xva6"]
+[ext_resource type="Texture2D" uid="uid://dbrrlp0gve517" path="res://assets/textures/fx/bolt/bolt2.png" id="3_7x7rd"]
+[ext_resource type="Texture2D" uid="uid://cgcch44xpywcp" path="res://assets/textures/fx/bolt/bolt3.png" id="4_yptx2"]
+[ext_resource type="Texture2D" uid="uid://cgj4wmx344wcb" path="res://assets/textures/fx/bolt/bolt4.png" id="5_7x7xp"]
+
+[sub_resource type="Animation" id="Animation_7x7rd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "fire_loop"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "fire_start"
+
+[sub_resource type="Animation" id="3"]
+resource_name = "hit"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_remove"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7l84f"]
+_data = {
+&"RESET": SubResource("Animation_7x7rd"),
+&"fire_loop": SubResource("1"),
+&"fire_start": SubResource("2"),
+&"hit": SubResource("3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k560y"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yptx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3xva6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7x7rd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yptx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7x7xp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerProjectile" instance=ExtResource("1")]
+
+[node name="ProjectileAnimations" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_7l84f")
+}
+
+[node name="Hitbox" parent="." index="2"]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_k560y")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." index="3"]
+sprite_frames = SubResource("SpriteFrames_yptx2")
+frame = 1

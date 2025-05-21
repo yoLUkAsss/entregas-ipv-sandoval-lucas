@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfhuuc0y27j60"]
+
+[ext_resource type="PackedScene" uid="uid://1ni1vgqewk7c" path="res://src/entities/Projectile.tscn" id="1"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "fire_loop"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "fire_start"
+
+[sub_resource type="Animation" id="3"]
+resource_name = "hit"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_remove"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uyr1p"]
+_data = {
+&"fire_loop": SubResource("1"),
+&"fire_start": SubResource("2"),
+&"hit": SubResource("3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uid2m"]
+radius = 8.0
+
+[node name="TurretProjectile" instance=ExtResource("1")]
+VELOCITY = 400.0
+
+[node name="LifetimeTimer" parent="." index="0"]
+wait_time = 3.0
+
+[node name="ProjectileAnimations" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_uyr1p")
+}
+
+[node name="Hitbox" parent="." index="2"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_uid2m")
