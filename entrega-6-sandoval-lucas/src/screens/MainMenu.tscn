@@ -1,0 +1,275 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://src/screens/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/Default-Big.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/Default-Medium.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/screens/LevelManager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/environment/DefaultBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/screens/components/MouseCamera.gd" type="Script" id=6]
+[ext_resource path="res://src/game/levels/tilesets/desert1.tres" type="TileSet" id=7]
+[ext_resource path="res://assets/textures/player/player_sheet.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/tileset/ruins/Dungeon Ruins Tileset Day.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/mouse/pointer.png" type="Texture" id=10]
+[ext_resource path="res://src/game/ui/options/OptionsMenu.tscn" type="PackedScene" id=11]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 288, 160 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 0.9
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 9 )
+region_rect = Rect2( 16, 16, 48, 48 )
+margin_left = 10.0
+margin_right = 10.281
+margin_top = 10.0
+margin_bottom = 10.0
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0, 0.298667, 0.64, 0.439216 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0, 0.298039, 0.639216, 0.623529 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0.588235, 0.639216, 0, 0.4 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0, 0, 0, 0.25098 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0, 0.298039, 0.639216, 0.25098 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="MainMenu" type="Node"]
+script = ExtResource( 1 )
+level_manager_scene = ExtResource( 4 )
+mouse_cursor = ExtResource( 10 )
+
+[node name="DefaultBackground" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="Sprite" parent="DefaultBackground/MoonLayer" index="0"]
+position = Vector2( 90, -53 )
+
+[node name="Sprite" parent="DefaultBackground/CloudsLayer1" index="0"]
+position = Vector2( 473, -60 )
+
+[node name="Sprite2" parent="DefaultBackground/CloudsLayer1" index="1"]
+position = Vector2( 69, -38 )
+
+[node name="Sprite3" parent="DefaultBackground/CloudsLayer1" index="2"]
+position = Vector2( 276, -65 )
+
+[node name="MountainsLayer" parent="DefaultBackground" index="5"]
+motion_scale = Vector2( 0.005, 0 )
+
+[node name="Sprite" parent="DefaultBackground/MountainsLayer" index="0"]
+position = Vector2( 63, 21 )
+
+[node name="Sprite2" parent="DefaultBackground/MountainsLayer" index="1"]
+position = Vector2( 147, 22 )
+
+[node name="Sprite3" parent="DefaultBackground/MountainsLayer" index="2"]
+position = Vector2( 245, 24 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+scroll_ignore_camera_zoom = true
+
+[node name="CharacterLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.05, 0 )
+
+[node name="BackTilemap" type="TileMap" parent="ParallaxBackground/CharacterLayer"]
+modulate = Color( 0.67451, 0.67451, 0.67451, 1 )
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -393227, 1, 196609, -393226, 1, 3, -393225, 1, 3, -393224, 1, 3, -393223, 1, 3, -393222, 1, 3, -393221, 1, 3, -393220, 1, 3, -393219, 1, 3, -393218, 1, 3, -393217, 1, 3, -458752, 1, 3, -458751, 1, 3, -458750, 1, 3, -458749, 1, 3, -458748, 1, 3, -458747, 1, 3, -458746, 1, 3, -458745, 1, 3, -458744, 1, 3, -458743, 1, 3, -458742, 1, 0, -327691, 1, 1, -327690, 1, 65538, -327689, 1, 65538, -327688, 1, 65538, -327687, 1, 65538, -327686, 1, 65538, -327685, 1, 65538, -327684, 1, 65538, -327683, 1, 65538, -327682, 1, 65538, -327681, 1, 65538, -393216, 1, 65538, -393215, 1, 65538, -393214, 1, 65538, -393213, 1, 65538, -393212, 1, 65538, -393211, 1, 65538, -393210, 1, 65538, -393209, 1, 65538, -393208, 1, 65538, -393207, 1, 65538, -393206, 1, 131075, -262155, 1, 1, -262154, 1, 65538, -262153, 1, 65538, -262152, 1, 65538, -262151, 1, 65538, -262150, 1, 65538, -262149, 1, 65538, -262148, 1, 65538, -262147, 1, 65538, -262146, 1, 65538, -262145, 1, 65538, -327680, 1, 65538, -327679, 1, 65538, -327678, 1, 65538, -327677, 1, 65538, -327676, 1, 65538, -327675, 1, 65538, -327674, 1, 65538, -327673, 1, 65538, -327672, 1, 65538, -327671, 1, 65538, -327670, 1, 131075, -196619, 1, 1, -196618, 1, 65538, -196617, 1, 65538, -196616, 1, 65538, -196615, 1, 65538, -196614, 1, 65538, -196613, 1, 65538, -196612, 1, 65538, -196611, 1, 65538, -196610, 1, 65538, -196609, 1, 65538, -262144, 1, 65538, -262143, 1, 65538, -262142, 1, 65538, -262141, 1, 65538, -262140, 1, 65538, -262139, 1, 65538, -262138, 1, 65538, -262137, 1, 65538, -262136, 1, 65538, -262135, 1, 65538, -262134, 1, 131075, -131083, 1, 1, -131082, 1, 65538, -131081, 1, 65538, -131080, 1, 65538, -131079, 1, 65538, -131078, 1, 65538, -131077, 44, 0, -131075, 44, 0, -131073, 44, 0, -196607, 44, 0, -196605, 1, 65538, -196604, 1, 65538, -196603, 1, 65538, -196602, 1, 65538, -196601, 1, 65538, -196600, 1, 65538, -196599, 1, 65538, -196598, 1, 131075, -65547, 1, 1, -65546, 1, 65538, -65545, 1, 65538, -65544, 46, 0, -65543, 1, 131073, -65542, 46, 0, -131069, 46, 0, -131068, 2, 131073, -131067, 46, 0, -131066, 1, 65538, -131065, 1, 65538, -131064, 1, 65538, -131063, 1, 65538, -131062, 1, 131075, -11, 1, 1, -10, 1, 65538, -9, 1, 65538, -5, 44, 0, -3, 44, 0, -1, 44, 0, -65535, 44, 0, -65530, 1, 65538, -65529, 1, 65538, -65528, 1, 65538, -65527, 1, 65538, -65526, 1, 131075, 65525, 1, 1, 65526, 1, 65538, 65527, 1, 65538, 65529, 2, 3, 4, 2, 3, 6, 1, 65538, 7, 2, 65539, 8, 2, 131074, 9, 1, 65538, 10, 1, 131075, 131061, 1, 1, 131062, 1, 65538, 131063, 1, 65538, 131064, 1, 65538, 131065, 1, 65538, 131066, 1, 65538, 131067, 44, 0, 131069, 44, 0, 131071, 44, 0, 65537, 44, 0, 65539, 1, 65538, 65540, 1, 65538, 65541, 1, 65538, 65542, 1, 65538, 65543, 2, 2, 65544, 2, 65537, 65545, 1, 65538, 65546, 1, 131075, 196597, 1, 1, 196598, 1, 65538, 196599, 1, 65538, 196600, 1, 65538, 196601, 46, 0, 196602, 1, 65538, 131075, 1, 65538, 131076, 1, 65538, 131077, 32, 0, 131078, 1, 131072, 131079, 1, 131074, 131080, 1, 65538, 131081, 1, 65538, 131082, 1, 131075, 262133, 1, 1, 262134, 1, 65538, 262135, 1, 65538, 262136, 1, 65538, 262137, 1, 65538, 262138, 1, 65538, 262139, 44, 0, 262141, 44, 0, 262143, 44, 0, 196609, 44, 0, 196611, 1, 65538, 196612, 1, 65538, 196613, 1, 131075, 196614, 31, 0, 196615, 1, 1, 196616, 1, 65538, 196617, 1, 65538, 196618, 1, 131075, 327669, 1, 1, 327670, 1, 65538, 327671, 1, 65538, 327672, 1, 65538, 327673, 1, 65538, 327674, 1, 65538, 327677, 1, 65538, 327678, 1, 65538, 327679, 1, 65538, 262144, 1, 65538, 262145, 1, 65538, 262146, 1, 65538, 262147, 1, 65538, 262148, 1, 65538, 262149, 1, 2, 262150, 1, 3, 262151, 1, 65537, 262152, 1, 65538, 262153, 1, 65538, 262154, 1, 131075, 393205, 1, 131072, 393206, 1, 131073, 393207, 1, 131073, 393208, 1, 131073, 393209, 1, 131073, 393210, 1, 131073, 393211, 1, 131073, 393212, 1, 131073, 393213, 1, 131073, 393214, 1, 131073, 393215, 1, 131073, 327680, 1, 131074, 327681, 1, 65539, 327682, 1, 131073, 327683, 1, 131073, 327684, 1, 131073, 327685, 1, 131073, 327686, 1, 131073, 327687, 1, 131073, 327688, 1, 131073, 327689, 1, 131073, 327690, 1, 196611, 393216, 1, 1, 393217, 1, 131075, 458752, 1, 131072, 458753, 1, 196611 )
+
+[node name="Ground" type="TileMap" parent="ParallaxBackground/CharacterLayer"]
+position = Vector2( 0, -6 )
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -131080, 15, 0, -131079, 17, 0, -131073, 18, 0, -65544, 26, 0, 327669, 0, 196613, 327670, 0, 7, 327671, 0, 7, 327672, 0, 3, 327673, 0, 3, 327674, 0, 3, 327675, 0, 3, 327676, 0, 3, 327677, 0, 3, 327678, 0, 3, 327679, 0, 3, 262144, 0, 3, 262145, 0, 3, 262146, 0, 7, 262147, 0, 3, 262148, 0, 3, 262149, 0, 7, 262150, 0, 3, 262151, 0, 7, 262152, 0, 7, 262153, 0, 0, 393205, 0, 1, 393206, 0, 65538, 393207, 0, 65538, 393208, 0, 65538, 393209, 0, 65538, 393210, 0, 65538, 393211, 0, 65538, 393212, 0, 65538, 393213, 0, 65538, 393214, 0, 65538, 393215, 0, 65538, 327680, 0, 65538, 327681, 0, 65538, 327682, 0, 65538, 327683, 0, 65538, 327684, 0, 65538, 327685, 0, 65538, 327686, 0, 65538, 327687, 0, 65538, 327688, 0, 65538, 327689, 0, 131079, 458741, 0, 5, 458742, 0, 65538, 458743, 0, 65538, 458744, 0, 65538, 458745, 0, 65538, 458746, 0, 65538, 458747, 0, 65538, 458748, 0, 65538, 458749, 0, 65538, 458750, 0, 65538, 458751, 0, 65538, 393216, 0, 65538, 393217, 0, 65538, 393218, 0, 65538, 393219, 0, 65538, 393220, 0, 65538, 393221, 0, 65538, 393222, 0, 65538, 393223, 0, 65538, 393224, 0, 65538, 393225, 0, 131075, 524277, 0, 1, 524278, 0, 65538, 524279, 0, 65538, 524280, 0, 65538, 524281, 0, 65538, 524282, 0, 65538, 524283, 0, 65538, 524284, 0, 65538, 524285, 0, 65538, 524286, 0, 65538, 524287, 0, 65538, 458752, 0, 65538, 458753, 0, 65538, 458754, 0, 65538, 458755, 0, 65538, 458756, 0, 65538, 458757, 0, 65538, 458758, 0, 65538, 458759, 0, 65538, 458760, 0, 65538, 458761, 0, 131075, 589813, 0, 5, 589814, 0, 65538, 589815, 0, 65538, 589816, 0, 65538, 589817, 0, 65538, 589818, 0, 65538, 589819, 0, 65538, 589820, 0, 65538, 589821, 0, 65538, 589822, 0, 65538, 589823, 0, 65538, 524288, 0, 65538, 524289, 0, 65538, 524290, 0, 65538, 524291, 0, 65538, 524292, 0, 65538, 524293, 0, 65538, 524294, 0, 65538, 524295, 0, 65538, 524296, 0, 65538, 524297, 0, 131079, 655349, 0, 131072, 655350, 0, 131073, 655351, 0, 131073, 655352, 0, 131077, 655353, 0, 131073, 655354, 0, 131077, 655355, 0, 131077, 655356, 0, 131073, 655357, 0, 131077, 655358, 0, 131077, 655359, 0, 131073, 589824, 0, 131077, 589825, 0, 131073, 589826, 0, 131077, 589827, 0, 131077, 589828, 0, 131073, 589829, 0, 131073, 589830, 0, 131073, 589831, 0, 131073, 589832, 0, 131077, 589833, 0, 196615 )
+
+[node name="Environment" type="TileMap" parent="ParallaxBackground/CharacterLayer"]
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -327691, 0, 196609, -327690, 0, 7, -327689, 0, 7, -327688, 0, 3, -327687, 0, 3, -327686, 0, 3, -327685, 0, 3, -327684, 0, 7, -327683, 0, 7, -327682, 0, 7, -327681, 0, 3, -393216, 0, 3, -393215, 0, 7, -393214, 0, 3, -393213, 0, 3, -393212, 0, 3, -393211, 0, 3, -393210, 0, 7, -393209, 0, 3, -393208, 0, 7, -393207, 0, 7, -393206, 0, 4, -262155, 0, 1, -262154, 0, 65538, -262153, 0, 65538, -262152, 0, 65538, -262151, 0, 65538, -262150, 0, 65538, -262149, 0, 65538, -262148, 0, 65538, -262147, 0, 65538, -262146, 0, 65538, -262145, 0, 65538, -327680, 0, 65538, -327679, 0, 65538, -327678, 0, 65538, -327677, 0, 65538, -327676, 0, 65538, -327675, 0, 65538, -327674, 0, 65538, -327673, 0, 65538, -327672, 0, 65538, -327671, 0, 65538, -327670, 0, 131075, -196619, 0, 5, -196618, 0, 65538, -196617, 0, 65538, -196616, 0, 65538, -196615, 0, 65538, -196614, 0, 65538, -196613, 0, 65538, -196612, 0, 65538, -196611, 0, 65538, -196610, 0, 65538, -196609, 0, 65538, -262144, 0, 65538, -262143, 0, 65538, -262142, 0, 65538, -262141, 0, 65538, -262140, 0, 65538, -262139, 0, 65538, -262138, 0, 65538, -262137, 0, 65538, -262136, 0, 65538, -262135, 0, 65538, -262134, 0, 131079, -131083, 0, 131076, -131082, 0, 131073, -131081, 0, 131073, -131080, 0, 131077, -131079, 0, 131073, -131078, 0, 131073, -131077, 0, 131077, -131076, 0, 131078, -131075, 0, 65538, -131074, 0, 65539, -131073, 0, 131073, -196608, 0, 131073, -196607, 0, 131077, -196606, 0, 131077, -196605, 0, 131073, -196604, 0, 131073, -196603, 0, 131073, -196602, 0, 131073, -196601, 0, 131077, -196600, 0, 131077, -196599, 0, 131077, -196598, 0, 196611, -65540, 37, 0, 131064, 39, 0, 131066, 18, 0, 65543, 9, 0, 131076, 8, 0, 262143, 45, 0, 196613, 29, 0, 196615, 34, 0 )
+
+[node name="Body" type="Sprite" parent="ParallaxBackground/CharacterLayer"]
+unique_name_in_owner = true
+position = Vector2( 12, 37 )
+texture = SubResource( 2 )
+hframes = 9
+vframes = 5
+frame = 4
+
+[node name="BodyAnimations" type="AnimationPlayer" parent="ParallaxBackground/CharacterLayer/Body"]
+root_node = NodePath("../..")
+autoplay = "idle"
+anims/RESET = SubResource( 6 )
+anims/idle = SubResource( 7 )
+
+[node name="TitlePivot" type="Node2D" parent="ParallaxBackground/CharacterLayer"]
+position = Vector2( 0, -71 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ParallaxBackground/CharacterLayer/TitlePivot"]
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="ParallaxBackground/CharacterLayer/TitlePivot/MarginContainer"]
+self_modulate = Color( 0.823529, 0.823529, 0.823529, 1 )
+margin_right = 213.0
+margin_bottom = 24.0
+grow_horizontal = 2
+custom_styles/panel = SubResource( 8 )
+
+[node name="Title" type="Label" parent="ParallaxBackground/CharacterLayer/TitlePivot/MarginContainer"]
+margin_right = 213.0
+margin_bottom = 24.0
+grow_horizontal = 2
+custom_colors/font_color = Color( 1, 0.772549, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "REPLACE THIS NAME"
+align = 1
+valign = 1
+
+[node name="MouseCamera" type="Camera2D" parent="."]
+visible = false
+position = Vector2( 144, 81 )
+current = true
+zoom = Vector2( 2, 2 )
+smoothing_enabled = true
+script = ExtResource( 6 )
+movement_strength = 0.25
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Container" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/Container"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 21.0
+margin_top = -13.0
+margin_right = 129.0
+margin_bottom = 64.0
+mouse_filter = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Container/Buttons"]
+margin_right = 108.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 1 )
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="CanvasLayer/Container/Buttons"]
+margin_top = 27.0
+margin_right = 108.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 1 )
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/Container/Buttons"]
+margin_top = 54.0
+margin_right = 108.0
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 1 )
+text = "Exit"
+
+[node name="OptionsMenu" parent="CanvasLayer" instance=ExtResource( 11 )]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/Container/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Container/Buttons/OptionsButton" to="CanvasLayer/OptionsMenu" method="show"]
+[connection signal="pressed" from="CanvasLayer/Container/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
+
+[editable path="DefaultBackground"]

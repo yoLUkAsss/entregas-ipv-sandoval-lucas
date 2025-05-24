@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/game/levels/Level01.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/screens/LevelManager.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/mouse/crosshair.png" type="Texture" id=3]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource( 2 )
+levels = [ ExtResource( 1 ) ]
+main_menu_path = "res://src/screens/MainMenu.tscn"
+mouse_cursor = ExtResource( 3 )
+
+[node name="CurrentLevelContainer" type="Node" parent="."]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/Default-Medium.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/menus/ActionInput.gd" type="Script" id=2]
+
+[node name="ActionInput" type="PanelContainer"]
+margin_right = 218.0
+margin_bottom = 45.0
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 211.0
+margin_bottom = 38.0
+custom_constants/separation = 20
+
+[node name="Input" type="Button" parent="HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 31.0
+
+[node name="Action" type="Label" parent="HBoxContainer"]
+margin_left = 32.0
+margin_top = 7.0
+margin_right = 98.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 1 )
+text = "Move Left"
+
+[connection signal="pressed" from="HBoxContainer/Input" to="." method="_on_Input_pressed"]

@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/Default-Medium.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/Default-Big.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/game/ui/DefeatMenu.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0.278431, 0.294118, 0.427451 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.490196, 0.419608, 0, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 2
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color( 0, 0.298039, 0.639216, 0.25098 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="DefeatMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -60.0
+margin_right = 80.0
+margin_bottom = 60.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 17.0
+margin_right = -10.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 2 )
+text = "Defeated"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 15.0
+margin_top = -8.0
+margin_right = -15.0
+margin_bottom = 12.0
+
+[node name="RetryButton" type="Button" parent="Panel/VBoxContainer"]
+margin_right = 130.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Restart"
+
+[node name="ReturnButton" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 27.0
+margin_right = 130.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Return"
+
+[connection signal="pressed" from="Panel/VBoxContainer/RetryButton" to="." method="_on_RetryButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/ReturnButton" to="." method="_on_ReturnButton_pressed"]
